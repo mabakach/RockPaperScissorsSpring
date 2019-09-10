@@ -26,13 +26,29 @@ public class IndexController {
         return new ModelAndView("index", model); // because `index.mustache`
     }
 
-
     @PostMapping
     public String play(@RequestParam Choice userChoice) {
-        // this is a mock implementation for now
         GameLogic gameLogic = new GameLogic();
         Choice computerChoice = gameLogic.computerDraw();
-        Game g = new Game(null, userChoice, computerChoice, 0L, 0L); gameRepository.save(g);
-        return "redirect:/"; // redirect to `/`//
+
+        long userScore = 0L;
+        long computerScore = 0L;
+
+        Winner winner = gameLogic.referee(userChoice, computerChoice);
+        switch(winner) {
+            case Player:
+                userScore = 1L;
+                break;
+            case Computer:
+                computerScore = 1L;
+                break;
+            default:
+                // the score does not change
+        }
+
+        Game g = new Game(null, userChoice, computerChoice, userScore, computerScore);
+        gameRepository.save(g);
+
+        return "redirect:/"; // redirect to `/`
     }
 }
