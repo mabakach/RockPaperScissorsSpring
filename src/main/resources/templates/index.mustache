@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Rock, Paper, Scissors</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<h1>Rock, Paper, Scissors</h1>
+
+<h2>Play</h2>
+
+<div>
+    <form method="post">
+        <p>
+            <button name="userChoice" value="Rock" type="submit">Rock</button>
+            <button name="userChoice" value="Paper" type="submit">Paper</button>
+            <button name="userChoice" value="Scissors" type="submit">Scissors</button>
+        </p>
+    </form>
+</div>
+
+<h2>Scoreboard</h2>
+
+<div>
+    <p>The computer won {{computerScoreTotal}} times.</p>
+    <p>The player won {{userScoreTotal}} times.</p>
+</div>
+
+<h2>Previous Games</h2>
+
+{{#entries}}
+<div>
+    <h3>Game {{id}}</h3>
+    <div>
+        <p>The player chose {{userChoice}} and got {{userScore}} score points.</p>
+        <p>The computer chose {{computerChoice}} and got {{computerScore}} score points.</p>
+        <hr>
+    </div>
+</div>
+{{/entries}}
+</body>
+
+</html>
